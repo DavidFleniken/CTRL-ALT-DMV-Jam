@@ -16,12 +16,16 @@ public class PlayerStats : MonoBehaviour
 
     const float hpDrain = 1f; // amount of hp lost every second
 
+    Rigidbody2D rb;
+
     private void Start()
     {
         curHealth = defaultHealth;
         curSpeed = defaultSpeed;
         curDamage = defaultDamage;
         curHost = defaultHost;
+
+        rb = GetComponent<Rigidbody2D>();
     }
     public enum Host
     {
@@ -108,8 +112,9 @@ public class PlayerStats : MonoBehaviour
         return new stats(curHealth, curSpeed, curDamage, curHost);
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
+        Debug.Log("Tag: " + col.gameObject.tag);
         if (col.gameObject.CompareTag("Enemy Attack"))
         {
             EnemyAttack attack = col.gameObject.GetComponentInParent<EnemyAttack>();
@@ -121,6 +126,8 @@ public class PlayerStats : MonoBehaviour
             else
             {
                 curHealth -= attack.getDamage();
+                rb.AddForce(attack.getKnockback());
+                Debug.Log("Hit! HP: " + curHealth);
             }
         }
     }

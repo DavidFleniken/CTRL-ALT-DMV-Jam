@@ -1,11 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
-public class EnemyAttack : MonoBehaviour
+public class PlayerAttack : MonoBehaviour
 {
     private float damage;
-    private EnemyStats stats;
-    private EnemyMovement movement;
 
     [SerializeField] float windupTime = 0.2f;
     [SerializeField] float attackUpTime = 0.1f;
@@ -13,17 +11,24 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] float knockback = 900f;
     [SerializeField] GameObject attackBox;
 
+    Rigidbody2D rb;
+    PlayerMovement movement;
+
     private void Start()
     {
-        movement = GetComponent<EnemyMovement>();
-        stats = GetComponent<EnemyStats>();
-        damage = stats.getStats().damage;
-
+        damage = PlayerStats.getStats().damage;
+        rb = GetComponent<Rigidbody2D>();
         attackBox.SetActive(false);
+        movement = GetComponent<PlayerMovement>();
     }
 
     public void attack()
     {
+        if (movement.getPaused())
+        {
+            return;
+        }
+
         movement.pauseSecs(windupTime + attackUpTime + endingLag);
         StartCoroutine(doAttack());
     }
@@ -39,8 +44,7 @@ public class EnemyAttack : MonoBehaviour
 
     public void attackDirection()
     {
-        Vector2 playerPos = PlayerObject.getPlayer().transform.position;
-        Vector2 dir = (playerPos - (Vector2)transform.position);
+        Vector2 dir = movement.getDir();
 
         // snap to nearest 90 degree increment
         Vector2 snapped;
@@ -67,11 +71,8 @@ public class EnemyAttack : MonoBehaviour
         return damage;
     }
 
-    public Vector2 getKnockback()
+    public float getKnockback()
     {
-        Vector2 playerPos = PlayerObject.getPlayer().transform.position;
-        Vector2 dir = (playerPos - (Vector2)transform.position).normalized;
-
-        return dir * knockback;
+        return knockback;
     }
 }

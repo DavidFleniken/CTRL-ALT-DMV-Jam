@@ -10,11 +10,15 @@ public class EnemyStats : MonoBehaviour
     float curSpeed;
     float curDamage;
     Type curType;
+    Condition curCondition = Condition.Alive;
 
     const float hpDrain = 1f; // amount of hp lost every second
 
+    Rigidbody2D rb;
+
     private void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         setType(enemyType);
     }
     public enum Type
@@ -24,6 +28,12 @@ public class EnemyStats : MonoBehaviour
         Child,
         Adult,
         Cop
+    };
+
+    public enum Condition
+    {
+        Alive,
+        Dead
     };
 
     public struct NPCStats
@@ -84,5 +94,28 @@ public class EnemyStats : MonoBehaviour
     public NPCStats getStats()
     {
         return new NPCStats(curHealth, curSpeed, curDamage, curType);
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Player Attack"))
+        {
+            PlayerAttack attack = col.gameObject.GetComponentInParent<PlayerAttack>();
+
+            if (attack == null)
+            {
+                Debug.LogError("Couldn't find player attack");
+            }
+            else
+            {
+                curHealth -= attack.getDamage();
+
+                Vector2 playerPos = PlayerObject.getPlayer().transform.position;
+                Vector2 dir = -(playerPos - (Vector2)transform.position).normalized;
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                rb.AddForce(dir * attack.getKnockback());
+            }
+
+        }
     }
 }

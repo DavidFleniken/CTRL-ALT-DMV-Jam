@@ -36,7 +36,25 @@ public class EnemyMovement : MonoBehaviour
             return;
         }
 
-        rb.linearVelocity = moveDir.normalized * speed;
+        Vector2 velo = moveDir.normalized * speed;
+
+        // simulate friction - mainly meant for knockback stuff - need to make sure it doesn't mess up normal movement
+        float diff = rb.linearVelocity.magnitude - velo.magnitude;
+        if (diff > 0f)
+        {
+            if (diff < speed) // When almost done, snap
+            {
+                rb.linearVelocity = velo;
+            }
+            else
+            {
+                rb.linearVelocity -= rb.linearVelocity * 10f * Time.deltaTime;
+            }
+        }
+        else
+        {
+            rb.linearVelocity = velo;
+        }
     }
 
     // Stops enemy movement for "secs" seconds
@@ -44,6 +62,7 @@ public class EnemyMovement : MonoBehaviour
     {
         Debug.Log("Paused for: " + secs);
         paused = true;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
         StartCoroutine(PauseFor(secs));
     }
 
@@ -51,6 +70,7 @@ public class EnemyMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(secs);
         paused = false;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
 }
