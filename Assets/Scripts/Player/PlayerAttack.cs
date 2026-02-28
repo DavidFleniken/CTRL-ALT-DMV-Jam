@@ -35,8 +35,8 @@ public class PlayerAttack : MonoBehaviour
 
     IEnumerator doAttack()
     {
-        yield return new WaitForSeconds(windupTime);
         attackDirection();
+        yield return new WaitForSeconds(windupTime);
         attackBox.SetActive(true);
         yield return new WaitForSeconds(attackUpTime);
         attackBox.SetActive(false);
