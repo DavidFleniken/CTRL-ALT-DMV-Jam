@@ -1,11 +1,12 @@
 using UnityEngine;
 using static GameManager;
 
+[DefaultExecutionOrder(-100)]
 public class EnemyStats : MonoBehaviour
 {
     // Stores Player Stats (Health, Damage, etc) and provides tools for modifying those values
 
-    [SerializeField] Host enemyType;
+    [SerializeField] Host enemyType = Host.Cat;
 
     float curHealth;
     float curSpeed;
@@ -20,6 +21,10 @@ public class EnemyStats : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        if (enemyType == Host.Worm)
+        {
+            Debug.LogError("cant have worm enemy");
+        }
         setType(enemyType);
     }
 
@@ -41,6 +46,7 @@ public class EnemyStats : MonoBehaviour
 
     public void setType(Host newType)
     {
+        Debug.Log("set to: " + newType);
         curType = newType;
 
         switch (newType)
@@ -80,6 +86,7 @@ public class EnemyStats : MonoBehaviour
 
     public NPCStats getStats()
     {
+        Debug.Log("dmg: " + curDamage);
         return new NPCStats(curHealth, curSpeed, curDamage, curType);
     }
 

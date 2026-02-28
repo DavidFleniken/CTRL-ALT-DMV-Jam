@@ -1,9 +1,12 @@
 using UnityEngine;
 using static GameManager;
+using System.Collections;
 
 public class InfectHost : MonoBehaviour
 {
     GameObject deadBody;
+    [SerializeField] float infectCD = 1f;
+    bool onCD = false;
 
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -24,6 +27,9 @@ public class InfectHost : MonoBehaviour
 
     public void infect()
     {
+        if (onCD)
+            return;
+
         Host curHost = PlayerStats.getStats().host;
 
         if (deadBody != null)
@@ -37,5 +43,13 @@ public class InfectHost : MonoBehaviour
             // become worm (if not already)
             PlayerStats.changeHost(Host.Worm);
         }
+        StartCoroutine(infectCooldown());
+    }
+
+    IEnumerator infectCooldown()
+    {
+        onCD = true;
+        yield return new WaitForSeconds(infectCD);
+        onCD = false;
     }
 }
