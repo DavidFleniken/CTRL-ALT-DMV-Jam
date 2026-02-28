@@ -97,7 +97,7 @@ public class EnemyStats : MonoBehaviour
             {
                 
                 curHealth -= attack.getDamage();
-                Debug.Log("enemy took damage. HP: " + curHealth);
+                //Debug.Log("enemy took damage. HP: " + curHealth);
 
                 Vector2 playerPos = PlayerObject.getPlayer().transform.position;
                 Vector2 dir = -(playerPos - (Vector2)transform.position).normalized;

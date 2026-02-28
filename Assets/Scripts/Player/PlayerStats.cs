@@ -47,6 +47,7 @@ public class PlayerStats : MonoBehaviour
 
     public static void changeHost(Host newHost)
     {
+        //Debug.Log("Changed Host to: " + newHost);
         curHost = newHost;
 
         switch (newHost)
@@ -119,7 +120,7 @@ public class PlayerStats : MonoBehaviour
             {
                 curHealth -= attack.getDamage();
                 rb.AddForce(attack.getKnockback());
-                Debug.Log("Hit! HP: " + curHealth);
+                //Debug.Log("Hit! HP: " + curHealth);
             }
         }
     }

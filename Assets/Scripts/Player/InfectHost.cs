@@ -30,6 +30,7 @@ public class InfectHost : MonoBehaviour
         {
             // infect new body
             PlayerStats.changeHost(deadBody.GetComponent<DeadEnemy>().getHost());
+            Destroy(deadBody);
         }
         else if (curHost != Host.Worm)
         {

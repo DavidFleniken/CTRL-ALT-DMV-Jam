@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
     // Stops enemy movement for "secs" seconds
     public void pauseSecs(float secs)
     {
-        Debug.Log("Paused for: " + secs);
+        //Debug.Log("Paused for: " + secs);
         paused = true;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         StartCoroutine(PauseFor(secs));
