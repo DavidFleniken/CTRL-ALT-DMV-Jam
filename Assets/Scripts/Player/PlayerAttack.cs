@@ -16,7 +16,6 @@ public class PlayerAttack : MonoBehaviour
 
     private void Start()
     {
-        damage = PlayerStats.getStats().damage;
         rb = GetComponent<Rigidbody2D>();
         attackBox.SetActive(false);
         movement = GetComponent<PlayerMovement>();
@@ -29,6 +28,7 @@ public class PlayerAttack : MonoBehaviour
             return;
         }
 
+        damage = PlayerStats.getStats().damage;
         movement.pauseSecs(windupTime + attackUpTime + endingLag);
         StartCoroutine(doAttack());
     }

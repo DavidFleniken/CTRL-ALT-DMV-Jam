@@ -1,16 +1,17 @@
 using UnityEngine;
+using static GameManager;
 
 public class EnemyStats : MonoBehaviour
 {
     // Stores Player Stats (Health, Damage, etc) and provides tools for modifying those values
 
-    [SerializeField] Type enemyType;
+    [SerializeField] Host enemyType;
 
     float curHealth;
     float curSpeed;
     float curDamage;
-    Type curType;
-    Condition curCondition = Condition.Alive;
+    Host curType;
+    //Condition curCondition = Condition.Alive;
 
     const float hpDrain = 1f; // amount of hp lost every second
 
@@ -21,29 +22,15 @@ public class EnemyStats : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         setType(enemyType);
     }
-    public enum Type
-    {
-        Cat,
-        Dog,
-        Child,
-        Adult,
-        Cop
-    };
-
-    public enum Condition
-    {
-        Alive,
-        Dead
-    };
 
     public struct NPCStats
     {
         public float health;
         public float speed;
         public float damage;
-        public Type type;
+        public Host type;
 
-        public NPCStats(float curHealth, float curSpeed, float curDamage, Type curType)
+        public NPCStats(float curHealth, float curSpeed, float curDamage, Host curType)
         {
             health = curHealth;
             speed = curSpeed;
@@ -52,37 +39,37 @@ public class EnemyStats : MonoBehaviour
         }
     }
 
-    public void setType(Type newType)
+    public void setType(Host newType)
     {
         curType = newType;
 
         switch (newType)
         {
-            case Type.Cat:
+            case Host.Cat:
                 curHealth = 10;
                 curSpeed = 5;
                 curDamage = 1;
                 break;
 
-            case Type.Dog:
+            case Host.Dog:
                 curHealth = 15;
                 curSpeed = 4;
                 curDamage = 3;
                 break;
 
-            case Type.Child:
+            case Host.Child:
                 curHealth = 20;
                 curSpeed = 3;
                 curDamage = 5;
                 break;
 
-            case Type.Adult:
+            case Host.Adult:
                 curHealth = 30;
                 curSpeed = 2;
                 curDamage = 10;
                 break;
 
-            case Type.Cop:
+            case Host.Cop:
                 curHealth = 30;
                 curSpeed = 2;
                 curDamage = 20;
@@ -108,7 +95,9 @@ public class EnemyStats : MonoBehaviour
             }
             else
             {
+                
                 curHealth -= attack.getDamage();
+                Debug.Log("enemy took damage. HP: " + curHealth);
 
                 Vector2 playerPos = PlayerObject.getPlayer().transform.position;
                 Vector2 dir = -(playerPos - (Vector2)transform.position).normalized;
@@ -116,6 +105,14 @@ public class EnemyStats : MonoBehaviour
                 rb.AddForce(dir * attack.getKnockback());
             }
 
+        }
+    }
+
+    private void Update()
+    {
+        if (curHealth <= 0)
+        {
+            GetComponent<EnemyDeath>().onDeath();
         }
     }
 }

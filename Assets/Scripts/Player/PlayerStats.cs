@@ -1,4 +1,5 @@
 using UnityEngine;
+using static GameManager;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -27,15 +28,6 @@ public class PlayerStats : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
     }
-    public enum Host
-    {
-        Worm,
-        Cat,
-        Dog,
-        Child,
-        Adult,
-        Cop
-    };
 
     public struct stats
     {
@@ -114,7 +106,7 @@ public class PlayerStats : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("Tag: " + col.gameObject.tag);
+        //Debug.Log("Tag: " + col.gameObject.tag);
         if (col.gameObject.CompareTag("Enemy Attack"))
         {
             EnemyAttack attack = col.gameObject.GetComponentInParent<EnemyAttack>();
