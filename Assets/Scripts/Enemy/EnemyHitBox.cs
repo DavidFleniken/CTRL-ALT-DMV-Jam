@@ -11,7 +11,7 @@ public class EnemyHitBox : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D col)
     {
-        Debug.Log("Hit " + col.name + " and HTA = " + hitThisAttack + " and TH = " + totalhits);
+        //Debug.Log("Hit " + col.name + " and HTA = " + hitThisAttack + " and TH = " + totalhits);
         if (hitThisAttack)
             return;
         //Debug.Log("Tag: " + col.gameObject.tag);

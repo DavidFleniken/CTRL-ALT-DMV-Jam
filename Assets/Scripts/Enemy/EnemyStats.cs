@@ -2,11 +2,11 @@ using UnityEngine;
 using static GameManager;
 
 [DefaultExecutionOrder(-100)]
-public class EnemyStats : MonoBehaviour
+public class EnemyStats : MonoBehaviour, Stats
 {
     // Stores Player Stats (Health, Damage, etc) and provides tools for modifying those values
 
-    [SerializeField] Host enemyType = Host.Cat;
+    [SerializeField] Host enemyType = Host.Worm;
 
     float curHealth;
     float curSpeed;
@@ -23,9 +23,12 @@ public class EnemyStats : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         if (enemyType == Host.Worm)
         {
-            Debug.LogError("cant have worm enemy");
+            // no specific enemy chosen. Wait for outside script to set type
         }
-        setType(enemyType);
+        else
+        {
+            setType(enemyType);
+        }
     }
 
     public struct NPCStats
@@ -46,39 +49,40 @@ public class EnemyStats : MonoBehaviour
 
     public void setType(Host newType)
     {
-        Debug.Log("set to: " + newType);
+        //Debug.Log("set to: " + newType);
         curType = newType;
+        enemyType = newType; // mainly for visibility in editor
 
         switch (newType)
         {
             case Host.Cat:
-                curHealth = 10;
-                curSpeed = 5;
+                curHealth = 5;
+                curSpeed = 3.5f;
                 curDamage = 1;
                 break;
 
             case Host.Dog:
-                curHealth = 15;
-                curSpeed = 4;
+                curHealth = 5;
+                curSpeed = 3;
                 curDamage = 3;
                 break;
 
             case Host.Child:
-                curHealth = 20;
-                curSpeed = 3;
-                curDamage = 5;
+                curHealth = 15;
+                curSpeed = 2.5f;
+                curDamage = 2;
                 break;
 
             case Host.Adult:
-                curHealth = 30;
+                curHealth = 20;
                 curSpeed = 2;
-                curDamage = 10;
+                curDamage = 5;
                 break;
 
             case Host.Cop:
-                curHealth = 30;
-                curSpeed = 2;
-                curDamage = 20;
+                curHealth = 20;
+                curSpeed = 1;
+                curDamage = 10;
                 break;
         }
     }
@@ -86,7 +90,7 @@ public class EnemyStats : MonoBehaviour
 
     public NPCStats getStats()
     {
-        Debug.Log("dmg: " + curDamage);
+        //Debug.Log("dmg: " + curDamage);
         return new NPCStats(curHealth, curSpeed, curDamage, curType);
     }
 
@@ -113,6 +117,11 @@ public class EnemyStats : MonoBehaviour
             }
 
         }
+    }
+
+    public void applyAttack(float damage)
+    {
+        curHealth -= damage;
     }
 
     private void Update()
