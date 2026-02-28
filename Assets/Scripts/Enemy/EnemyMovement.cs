@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using static EnemyStats;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] float speed = 2.5f;
     [SerializeField] float attackRange = 2f;
+    [SerializeField] float copRangeModifier = 5f;
     
     Rigidbody2D rb;
     EnemyAttack attack;
@@ -17,6 +19,16 @@ public class EnemyMovement : MonoBehaviour
     {
         attack = GetComponent<EnemyAttack>();
         rb = GetComponent<Rigidbody2D>();
+
+        NPCStats stats = GetComponent<EnemyStats>().getStats();
+
+        if (stats.type == GameManager.Host.Cop)
+        {
+            // increase attack range by a lot
+            attackRange *= copRangeModifier;
+        }
+
+        speed = stats.speed;
     }
 
     private void Update()
@@ -26,6 +38,10 @@ public class EnemyMovement : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             return;
         }
+
+        NPCStats stats = GetComponent<EnemyStats>().getStats();
+
+        speed = stats.speed;
 
         Vector2 playerPos = PlayerObject.getPlayer().transform.position;
         Vector2 moveDir = (playerPos - (Vector2)transform.position);

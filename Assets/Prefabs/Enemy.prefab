@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 9171157434259260081}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,6 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   speed: 1.5
   attackRange: 1
+  copRangeModifier: 5
 --- !u!114 &905614589501672166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fc965af23027f94abdf67870a2eb0f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
-  enemyType: 1
+  enemyType: 0
 --- !u!114 &3948373931261363643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,6 +143,9 @@ MonoBehaviour:
   endingLag: 0.3
   knockback: 900
   attackBox: {fileID: 7597566349900423771}
+  bullet: {fileID: 3621370204042883329, guid: 325fc264d5ad47446896a44d71565bd2, type: 3}
+  bulletSpeed: 5
+  copLagMult: 2.5
 --- !u!114 &5383116073619552134
 MonoBehaviour:
   m_ObjectHideFlags: 0

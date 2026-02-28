@@ -1,7 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerAttack : MonoBehaviour
+public interface Attack
+{
+    public float getDamage();
+}
+public class PlayerAttack : MonoBehaviour, Attack
 {
     private float damage;
 
@@ -10,6 +14,9 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float endingLag = 0.1f;
     [SerializeField] float knockback = 900f;
     [SerializeField] GameObject attackBox;
+
+    [SerializeField] GameObject bullet;
+    [SerializeField] float bulletSpeed = 5f;
 
     Rigidbody2D rb;
     PlayerMovement movement;
@@ -37,7 +44,22 @@ public class PlayerAttack : MonoBehaviour
     {
         attackDirection();
         yield return new WaitForSeconds(windupTime);
-        attackBox.SetActive(true);
+        
+        if (PlayerStats.getStats().host != GameManager.Host.Cop)
+        {
+            attackBox.SetActive(true);
+        }
+        else
+        {
+            // cop unique logic
+            GameObject shot = Instantiate(bullet, transform.position, attackBox.transform.rotation);
+            Bullet b = shot.GetComponent<Bullet>();
+            b.setFaction(Bullet.Faction.Player);
+            b.setAttack(this);
+            shot.GetComponent<Rigidbody2D>().linearVelocity = -(attackBox.transform.right).normalized * bulletSpeed;
+            Debug.Log((attackBox.transform.right).normalized * bulletSpeed);
+            //Debug.Log(shot.GetComponent<Rigidbody2D>().linearVelocity);
+        }
         yield return new WaitForSeconds(attackUpTime);
         attackBox.SetActive(false);
     }
@@ -49,7 +71,7 @@ public class PlayerAttack : MonoBehaviour
         // snap to nearest 90 degree increment
         Vector2 snapped;
 
-        if (dir == Vector2.zero)
+        if (dir == Vector2.zero || PlayerStats.getStats().host == GameManager.Host.Cop)
         {
             snapped = dir;
         }

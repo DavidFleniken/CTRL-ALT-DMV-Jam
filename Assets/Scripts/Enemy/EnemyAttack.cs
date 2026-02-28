@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 
-public class EnemyAttack : MonoBehaviour
+public class EnemyAttack : MonoBehaviour, Attack
 {
     private float damage;
     private EnemyStats stats;
@@ -13,6 +13,9 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] float endingLag = 0.1f;
     [SerializeField] float knockback = 900f;
     [SerializeField] GameObject attackBox;
+    [SerializeField] GameObject bullet;
+    [SerializeField] float bulletSpeed = 5f;
+    [SerializeField] float copLagMult = 2.5f;
 
     private void Start()
     {
@@ -21,6 +24,13 @@ public class EnemyAttack : MonoBehaviour
         damage = stats.getStats().damage;
 
         attackBox.SetActive(false);
+
+        // set changes for cop
+        if (stats.getStats().type == GameManager.Host.Cop)
+        {
+            windupTime *= copLagMult;
+            endingLag *= copLagMult;
+        }
     }
 
     public void attack()
@@ -33,7 +43,24 @@ public class EnemyAttack : MonoBehaviour
     {
         yield return new WaitForSeconds(windupTime);
         attackDirection();
-        attackBox.SetActive(true);
+
+        if (stats.getStats().type != GameManager.Host.Cop)
+        {
+            attackBox.SetActive(true);
+        }
+        else
+        {
+            // cop unique logic
+            GameObject shot = Instantiate(bullet, transform.position, attackBox.transform.rotation);
+            Bullet b = shot.GetComponent<Bullet>();
+            b.setFaction(Bullet.Faction.Enemy);
+            b.setAttack(this);
+            shot.GetComponent<Rigidbody2D>().linearVelocity = -(attackBox.transform.right).normalized * bulletSpeed;
+            //Debug.Log((attackBox.transform.rotation.eulerAngles).normalized * bulletSpeed);
+            //Debug.Log(shot.GetComponent<Rigidbody2D>().linearVelocity);
+        }
+
+
         yield return new WaitForSeconds(attackUpTime);
         attackBox.SetActive(false);
     }
@@ -43,21 +70,30 @@ public class EnemyAttack : MonoBehaviour
         Vector2 playerPos = PlayerObject.getPlayer().transform.position;
         Vector2 dir = (playerPos - (Vector2)transform.position);
 
-        // snap to nearest 90 degree increment
+        // snap to nearest 90 degree increment unless cop
         Vector2 snapped;
 
-        if (dir == Vector2.zero)
+        if (stats.getStats().type != GameManager.Host.Cop)
         {
-            snapped = dir;
+            if (dir == Vector2.zero)
+            {
+                snapped = dir;
+            }
+            else
+            {
+                if (Mathf.Abs(dir.x) >= Mathf.Abs(dir.y))
+                    snapped = new Vector2(Mathf.Sign(dir.x), 0f);
+                else
+                    snapped = new Vector2(0f, Mathf.Sign(dir.y));
+
+            }
         }
         else
         {
-            if (Mathf.Abs(dir.x) >= Mathf.Abs(dir.y))
-                snapped = new Vector2(Mathf.Sign(dir.x), 0f);
-            else
-                snapped = new Vector2(0f, Mathf.Sign(dir.y));
-
+            snapped = dir;
         }
+
+        
 
         float angle = Mathf.Atan2(snapped.y, snapped.x) * Mathf.Rad2Deg;
         attackBox.transform.rotation = Quaternion.Euler(0f, 0f, angle - 180f); // sub by 180 cause I messed up something somewhere I guess

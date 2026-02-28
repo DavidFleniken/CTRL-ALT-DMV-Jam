@@ -2,7 +2,11 @@ using UnityEngine;
 using static GameManager;
 using TMPro;
 
-public class PlayerStats : MonoBehaviour
+public interface Stats
+{
+    public void applyAttack(float damage);
+}
+public class PlayerStats : MonoBehaviour, Stats
 {
     // Stores Player Stats (Health, Damage, etc) and provides tools for modifying those values
 
@@ -97,7 +101,7 @@ public class PlayerStats : MonoBehaviour
         if (curHost != Host.Worm)
             curHealth -= hpDrain * Time.deltaTime;
 
-        hpUI.text = "HP: " + ((int)curHealth + 1);
+        hpUI.text = "HP: " + (int)(curHealth + .5f);
         //Debug.Log(getStats().host);
 
         if (curHealth + 1 <= 0)
@@ -113,10 +117,15 @@ public class PlayerStats : MonoBehaviour
 
     public void applyAttack(float damage, Vector2 knockback)
     {
-        Debug.Log("before hit: hp = " + curHealth + " damage = " + damage);
+        //Debug.Log("before hit: hp = " + curHealth + " damage = " + damage);
         curHealth -= damage;
         rb.AddForce(knockback);
 
-        Debug.Log("Hit: hp = " + curHealth);
+        //Debug.Log("Hit: hp = " + curHealth);
+    }
+
+    public void applyAttack(float damage)
+    {
+        curHealth -= damage;
     }
 }
