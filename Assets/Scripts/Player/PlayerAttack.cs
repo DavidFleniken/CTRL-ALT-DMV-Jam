@@ -68,7 +68,8 @@ public class PlayerAttack : MonoBehaviour
 
     public float getDamage()
     {
-        return damage;
+        return PlayerStats.getStats().damage;
+
     }
 
     public float getKnockback()

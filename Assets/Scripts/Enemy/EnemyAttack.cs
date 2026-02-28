@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
+
 public class EnemyAttack : MonoBehaviour
 {
     private float damage;
@@ -64,7 +65,7 @@ public class EnemyAttack : MonoBehaviour
 
     public float getDamage()
     {
-        return damage;
+        return stats.getStats().damage;
     }
 
     public Vector2 getKnockback()

@@ -1,5 +1,6 @@
 using UnityEngine;
 using static GameManager;
+using TMPro;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] float defaultSpeed = 3f;
     [SerializeField] float defaultDamage = 0f;
     [SerializeField] Host defaultHost = Host.Worm;
+    [SerializeField] TMP_Text hpUI;
 
     static float curHealth;
     static float curSpeed;
@@ -61,40 +63,44 @@ public class PlayerStats : MonoBehaviour
             case Host.Cat:
                 curHealth = 10;
                 curSpeed = 5;
-                curDamage = 1;
+                curDamage = 4;
                 break;
 
             case Host.Dog:
                 curHealth = 15;
                 curSpeed = 4;
-                curDamage = 3;
+                curDamage = 8;
                 break;
 
             case Host.Child:
                 curHealth = 20;
                 curSpeed = 3;
-                curDamage = 5;
+                curDamage = 10;
                 break;
 
             case Host.Adult:
                 curHealth = 30;
                 curSpeed = 2;
-                curDamage = 10;
+                curDamage = 15;
                 break;
 
             case Host.Cop:
                 curHealth = 30;
                 curSpeed = 2;
-                curDamage = 20;
+                curDamage = 30;
                 break;
         }
     }
 
     private void Update()
     {
-        curHealth -= hpDrain * Time.deltaTime;
+        if (curHost != Host.Worm)
+            curHealth -= hpDrain * Time.deltaTime;
 
-        if (curHealth <= 0)
+        hpUI.text = "HP: " + ((int)curHealth + 1);
+        //Debug.Log(getStats().host);
+
+        if (curHealth + 1 <= 0)
         {
             // Do game over stuff
         }
@@ -105,23 +111,12 @@ public class PlayerStats : MonoBehaviour
         return new stats(curHealth, curSpeed, curDamage, curHost);
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    public void applyAttack(float damage, Vector2 knockback)
     {
-        //Debug.Log("Tag: " + col.gameObject.tag);
-        if (col.gameObject.CompareTag("Enemy Attack"))
-        {
-            EnemyAttack attack = col.gameObject.GetComponentInParent<EnemyAttack>();
+        Debug.Log("before hit: hp = " + curHealth + " damage = " + damage);
+        curHealth -= damage;
+        rb.AddForce(knockback);
 
-            if (attack == null)
-            {
-                Debug.LogError("Couldn't find enemy attack");
-            }
-            else
-            {
-                curHealth -= attack.getDamage();
-                rb.AddForce(attack.getKnockback());
-                //Debug.Log("Hit! HP: " + curHealth);
-            }
-        }
+        Debug.Log("Hit: hp = " + curHealth);
     }
 }
