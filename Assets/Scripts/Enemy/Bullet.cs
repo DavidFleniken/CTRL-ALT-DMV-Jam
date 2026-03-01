@@ -31,6 +31,13 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
+
+        if (col.CompareTag("Terrain"))
+        {
+            Destroy(gameObject);
+        }
+
+
         Stats colStats = null;
 
         if (parentFaction == Faction.Enemy)
