@@ -110,7 +110,7 @@ public class PlayerStats : MonoBehaviour, Stats
 
         if (curHealth + 1 <= 0)
         {
-            // Do game over stuff
+            GetComponent<PlayerDeath>().onDeath();
         }
     }
 
