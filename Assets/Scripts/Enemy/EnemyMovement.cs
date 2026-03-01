@@ -1,14 +1,11 @@
 using UnityEngine;
 using System.Collections;
 using static EnemyStats;
+using static GameManager;
 
 public class EnemyMovement : MonoBehaviour
 {
     // Moves in a straight line to player at set speed
-
-    // Each enemy type get's their own array of animation clips
-    // by index: 0 is idle, 1 is walk, 2 is attack
-    [SerializeField] AnimationClip[] adultClips;
 
 
     [SerializeField] float speed = 2.5f;
@@ -17,6 +14,8 @@ public class EnemyMovement : MonoBehaviour
     
     Rigidbody2D rb;
     EnemyAttack attack;
+    Animator anim;
+    SpriteRenderer sr;
 
     bool paused = false;
     bool stuckChecking = false;
@@ -40,7 +39,11 @@ public class EnemyMovement : MonoBehaviour
         }
 
         speed = stats.speed;
+        anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
     }
+
+    
 
     private void FixedUpdate()
     {
@@ -77,11 +80,19 @@ public class EnemyMovement : MonoBehaviour
 
             // reset any stuck checking for good measure
             stuckChecking = false;
+            anim.SetBool("moving", false);
 
             return;
         }
 
-        
+        // animation logic
+        if (rb.linearVelocity.magnitude > 0)
+        {
+            anim.SetBool("moving", true);
+
+            sr.flipX = rb.linearVelocityX > 0;
+
+        }
 
         NPCStats stats = GetComponent<EnemyStats>().getStats();
 
@@ -92,6 +103,7 @@ public class EnemyMovement : MonoBehaviour
 
         if (moveDir.magnitude <= attackRange)
         {
+            anim.SetTrigger("attacked");
             attack.attack();
             return;
         }

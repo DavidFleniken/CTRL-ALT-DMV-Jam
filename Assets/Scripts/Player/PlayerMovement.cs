@@ -13,6 +13,9 @@ public class PlayerMovement : MonoBehaviour
     Vector2 lastDir;
     Camera cam;
 
+    Animator anim;
+    SpriteRenderer sr;
+
     bool paused = false;
     float zOffset = 0;
 
@@ -21,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         cam = GetComponentInChildren<Camera>();
         zOffset = transform.rotation.eulerAngles.z;
+        anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -41,6 +46,17 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        // animation logic
+        bool isWorm = PlayerStats.getStats().host == GameManager.Host.Worm;
+
+        if (rb.linearVelocity.magnitude > 0)
+        {
+            anim.SetBool("moving", true);
+
+            sr.flipX = rb.linearVelocityX > 0 && !isWorm; // dont flip if worm
+
+        }
+
         // simulate friction - mainly meant for knockback stuff - need to make sure it doesn't mess up normal movement
         float diff = rb.linearVelocity.magnitude - velo.magnitude;
         if (diff > 0f)
@@ -59,7 +75,12 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = velo;
         }
 
-        // rotate player depending on lastDir
+        // rotate player depending on lastDir, if worm only
+        if (!isWorm)
+        {
+            return;
+        }
+
         Vector2 dir = lastDir.normalized;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, angle + 180f + zOffset);

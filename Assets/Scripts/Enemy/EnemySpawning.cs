@@ -16,6 +16,8 @@ public class EnemySpawning : MonoBehaviour
     [SerializeField] float curDifficulty = 1;
     [SerializeField] float difficultyIncreaseRate = 0.1f; // linear rate of difficulty increase
 
+    const float deathDistance = 100; // when reach this distance from center, summon a bunch of people to force death
+
     private void Start()
     {
         player = PlayerObject.getPlayer();
@@ -36,6 +38,12 @@ public class EnemySpawning : MonoBehaviour
     {
         timeBetweenSpawns -= 0.5f * timeBetweenSpawns * Time.deltaTime / spawnTimeHalfLife;
         curDifficulty += difficultyIncreaseRate * Time.deltaTime;
+
+        if(player.transform.position.magnitude > deathDistance)
+        {
+            timeBetweenSpawns = 0.1f;
+            curDifficulty = 10;
+        }
         //Debug.Log("Time: " + timeBetweenSpawns);
     }
 

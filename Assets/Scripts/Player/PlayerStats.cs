@@ -110,7 +110,12 @@ public class PlayerStats : MonoBehaviour, Stats
 
         if (curHealth + 1 <= 0)
         {
-            GetComponent<PlayerDeath>().onDeath();
+            if (curHost == Host.Worm)
+                GetComponent<PlayerDeath>().onDeath();
+            else
+            {
+                GetComponent<InfectHost>().infect();
+            }
         }
     }
 
