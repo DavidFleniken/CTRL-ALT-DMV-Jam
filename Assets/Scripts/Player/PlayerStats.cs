@@ -1,6 +1,7 @@
 using UnityEngine;
 using static GameManager;
 using TMPro;
+using UnityEngine.UI;
 
 public interface Stats
 {
@@ -14,9 +15,10 @@ public class PlayerStats : MonoBehaviour, Stats
     [SerializeField] float defaultSpeed = 3f;
     [SerializeField] float defaultDamage = 0f;
     [SerializeField] Host defaultHost = Host.Worm;
-    [SerializeField] TMP_Text hpUI;
+    [SerializeField] Image healthBar;
 
     static float curHealth;
+    static float maxHealth;
     static float curSpeed;
     static float curDamage;
     static Host curHost;
@@ -94,6 +96,8 @@ public class PlayerStats : MonoBehaviour, Stats
                 curDamage = 30;
                 break;
         }
+
+        maxHealth = curHealth;
     }
 
     private void Update()
@@ -101,7 +105,7 @@ public class PlayerStats : MonoBehaviour, Stats
         if (curHost != Host.Worm)
             curHealth -= hpDrain * Time.deltaTime;
 
-        hpUI.text = "HP: " + (int)(curHealth + .5f);
+        healthBar.fillAmount = (curHealth / maxHealth);
         //Debug.Log(getStats().host);
 
         if (curHealth + 1 <= 0)
