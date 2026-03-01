@@ -21,8 +21,12 @@ public class PlayerAttack : MonoBehaviour, Attack
     Rigidbody2D rb;
     PlayerMovement movement;
 
+    [SerializeField] AudioClip playerAttackClip;
+    AudioSource audioSource;
+
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         attackBox.SetActive(false);
         movement = GetComponent<PlayerMovement>();
@@ -33,6 +37,11 @@ public class PlayerAttack : MonoBehaviour, Attack
         if (movement.getPaused())
         {
             return;
+        }
+
+        if (playerAttackClip != null)
+        {
+            audioSource.PlayOneShot(playerAttackClip);
         }
 
         damage = PlayerStats.getStats().damage;

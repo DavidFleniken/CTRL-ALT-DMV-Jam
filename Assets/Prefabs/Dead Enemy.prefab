@@ -155,3 +155,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f254afaba3927924a9a9f5f1864f09ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadEnemy
+  defaultHost: 5

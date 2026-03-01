@@ -4,9 +4,12 @@ public class EnemyHitBox : MonoBehaviour
 {
     bool hitThisAttack = false;
     static int totalhits = 0;
+    [SerializeField] AudioClip hitSound;
+    AudioSource hitAudioSource;
 
     private void OnEnable()
     {
+        hitAudioSource = GetComponent<AudioSource>();
         hitThisAttack = false;
     }
     private void OnTriggerStay2D(Collider2D col)
@@ -28,6 +31,10 @@ public class EnemyHitBox : MonoBehaviour
                 hitThisAttack = true;
                 totalhits++;
                 PlayerObject.getPlayer().GetComponent<PlayerStats>().applyAttack(attack.getDamage(), attack.getKnockback());
+                if (hitSound != null)
+                {
+                    hitAudioSource.PlayOneShot(hitSound);
+                }
             }
         }
     }

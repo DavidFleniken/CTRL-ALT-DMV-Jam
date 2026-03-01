@@ -7,7 +7,13 @@ public class InfectHost : MonoBehaviour
     GameObject deadBody;
     [SerializeField] float infectCD = 1f;
     bool onCD = false;
+    [SerializeField] AudioClip infectSound;
+    AudioSource infectSource;
 
+    void Start()
+    {
+        infectSource = GetComponent<AudioSource>();
+    }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -29,6 +35,11 @@ public class InfectHost : MonoBehaviour
     {
         if (onCD)
             return;
+
+        if (infectSound != null)
+        {
+            infectSource.PlayOneShot(infectSound);
+        }
 
         Host curHost = PlayerStats.getStats().host;
 
