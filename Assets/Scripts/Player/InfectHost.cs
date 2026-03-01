@@ -8,7 +8,13 @@ public class InfectHost : MonoBehaviour
     [SerializeField] float infectCD = 1f;
     [SerializeField] ParticleSystem ps;
     bool onCD = false;
+    [SerializeField] AudioClip infectSound;
+    AudioSource infectSource;
 
+    void Start()
+    {
+        infectSource = GetComponent<AudioSource>();
+    }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -30,6 +36,11 @@ public class InfectHost : MonoBehaviour
     {
         if (onCD)
             return;
+
+        if (infectSound != null)
+        {
+            infectSource.PlayOneShot(infectSound);
+        }
 
         Host curHost = PlayerStats.getStats().host;
 
