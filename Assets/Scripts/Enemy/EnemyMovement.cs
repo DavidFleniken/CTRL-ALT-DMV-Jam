@@ -41,6 +41,8 @@ public class EnemyMovement : MonoBehaviour
         speed = stats.speed;
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+
+        pauseSecs(0.5f);
     }
 
     
@@ -81,6 +83,12 @@ public class EnemyMovement : MonoBehaviour
             // reset any stuck checking for good measure
             stuckChecking = false;
             anim.SetBool("moving", false);
+
+            Vector2 pPos = PlayerObject.getPlayer().transform.position;
+            Vector2 moveDirect = (pPos - (Vector2)transform.position);
+
+            if (Mathf.Abs(moveDirect.normalized.x) > 0.2f)
+                sr.flipX = moveDirect.x > 0;
 
             return;
         }

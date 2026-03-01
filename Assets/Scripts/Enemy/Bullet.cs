@@ -19,6 +19,11 @@ public class Bullet : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        if (hitSound != null)
+        {
+            if (!audioSource.isPlaying)
+                audioSource.PlayOneShot(hitSound);
+        }
         StartCoroutine(aliveTimer());
     }
 

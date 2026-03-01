@@ -27,10 +27,10 @@ public class EnemySpawning : MonoBehaviour
     void spawnEnemy(Host enemyType)
     {
         // generate a random vector with magnitude between noSpawnRadius and SpawnRadius
-        Vector2 spawnVec = (new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f))).normalized;
+        Vector3 spawnVec = (new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-0.2f, 0f))).normalized;
         spawnVec *= Random.Range(noSpawnRadius, spawnRadius);
 
-        GameObject newEnemy = Instantiate(enemyPrefab, (Vector2)player.transform.position + spawnVec, enemyPrefab.transform.rotation);
+        GameObject newEnemy = Instantiate(enemyPrefab, player.transform.position + spawnVec, enemyPrefab.transform.rotation);
         newEnemy.GetComponent<EnemyStats>().setType(enemyType);
     }
 
@@ -62,11 +62,12 @@ public class EnemySpawning : MonoBehaviour
 
         if (choice < 1)
         {
-            enemy = Host.Cat;
+            //enemy = Host.Cat;
+            enemy = Host.Child;
         }
         else if (choice < 2)
         {
-            enemy = Host.Dog;
+            enemy = Host.Adult;
         }
         else if (choice < 3)
         {

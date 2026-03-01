@@ -34,7 +34,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (velo != Vector2.zero)
         {
+            anim.SetBool("moving", true);
             lastDir = velo.normalized;
+        }
+        else
+        {
+            Debug.Log("Stopped moving");
+            anim.SetBool("moving", false);
         }
     }
 
@@ -43,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
         if (paused)
         {
             rb.linearVelocity = Vector2.zero;
+            anim.SetBool("moving", false);
             return;
         }
 
@@ -51,7 +58,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (rb.linearVelocity.magnitude > 0)
         {
-            anim.SetBool("moving", true);
 
             sr.flipX = rb.linearVelocityX > 0 && !isWorm; // dont flip if worm
 
@@ -78,6 +84,8 @@ public class PlayerMovement : MonoBehaviour
         // rotate player depending on lastDir, if worm only
         if (!isWorm)
         {
+            cam.transform.rotation = Quaternion.identity;
+            sr.color = Color.orchid;
             return;
         }
 

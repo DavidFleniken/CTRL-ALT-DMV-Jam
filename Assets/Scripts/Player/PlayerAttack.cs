@@ -34,10 +34,12 @@ public class PlayerAttack : MonoBehaviour, Attack
 
     public void attack()
     {
-        if (movement.getPaused())
+        if (movement.getPaused() || PlayerStats.getStats().host == GameManager.Host.Worm)
         {
             return;
         }
+
+        GetComponent<Animator>().SetTrigger("attacked");
 
         if (playerAttackClip != null)
         {
@@ -61,12 +63,18 @@ public class PlayerAttack : MonoBehaviour, Attack
         else
         {
             // cop unique logic
-            GameObject shot = Instantiate(bullet, transform.position, attackBox.transform.rotation);
+            Vector3 offset = new Vector2(-1.5f, 0.17f);
+            offset.x *= GetComponent<SpriteRenderer>().flipX ? -1 : 1;
+            Vector2 dir = movement.getDir();
+            if (Mathf.Abs(dir.y) > Mathf.Abs(dir.x))
+                offset *= 0;
+
+            GameObject shot = Instantiate(bullet, transform.position + offset, attackBox.transform.rotation);
             Bullet b = shot.GetComponent<Bullet>();
             b.setFaction(Bullet.Faction.Player);
             b.setAttack(this);
             shot.GetComponent<Rigidbody2D>().linearVelocity = -(attackBox.transform.right).normalized * bulletSpeed;
-            Debug.Log((attackBox.transform.right).normalized * bulletSpeed);
+            //Debug.Log((attackBox.transform.right).normalized * bulletSpeed);
             //Debug.Log(shot.GetComponent<Rigidbody2D>().linearVelocity);
         }
         yield return new WaitForSeconds(attackUpTime);

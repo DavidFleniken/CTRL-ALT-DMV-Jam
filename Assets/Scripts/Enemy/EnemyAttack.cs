@@ -17,6 +17,7 @@ public class EnemyAttack : MonoBehaviour, Attack
     [SerializeField] float bulletSpeed = 5f;
     [SerializeField] float copLagMult = 2.5f;
 
+
     private void Start()
     {
         movement = GetComponent<EnemyMovement>();
@@ -51,7 +52,9 @@ public class EnemyAttack : MonoBehaviour, Attack
         else
         {
             // cop unique logic
-            GameObject shot = Instantiate(bullet, transform.position, attackBox.transform.rotation);
+            Vector3 offset = new Vector2(-1.5f, 0.17f);
+            offset.x *= GetComponent<SpriteRenderer>().flipX ? -1 : 1;
+            GameObject shot = Instantiate(bullet, transform.position + offset, attackBox.transform.rotation);
             Bullet b = shot.GetComponent<Bullet>();
             b.setFaction(Bullet.Faction.Enemy);
             b.setAttack(this);

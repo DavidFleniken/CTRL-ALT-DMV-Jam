@@ -1,7 +1,7 @@
 using UnityEngine;
 using static GameManager;
 
-[DefaultExecutionOrder(-100)]
+[DefaultExecutionOrder(-200)]
 public class EnemyStats : MonoBehaviour, Stats
 {
     // Stores Player Stats (Health, Damage, etc) and provides tools for modifying those values
@@ -12,6 +12,7 @@ public class EnemyStats : MonoBehaviour, Stats
     float curSpeed;
     float curDamage;
     Host curType;
+    Animator anim;
     //Condition curCondition = Condition.Alive;
 
     const float hpDrain = 1f; // amount of hp lost every second
@@ -20,6 +21,7 @@ public class EnemyStats : MonoBehaviour, Stats
 
     private void Start()
     {
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         if (enemyType == Host.Worm)
         {
@@ -53,36 +55,46 @@ public class EnemyStats : MonoBehaviour, Stats
         curType = newType;
         enemyType = newType; // mainly for visibility in editor
 
+        if (anim == null)
+        {
+            anim = GetComponent<Animator>();
+        }
+
         switch (newType)
         {
             case Host.Cat:
                 curHealth = 5;
                 curSpeed = 3.5f;
                 curDamage = 1;
+                anim.SetInteger("type", 1);
                 break;
 
             case Host.Dog:
                 curHealth = 5;
                 curSpeed = 3;
                 curDamage = 3;
+                anim.SetInteger("type", 2);
                 break;
 
             case Host.Child:
                 curHealth = 15;
                 curSpeed = 2.5f;
                 curDamage = 2;
+                anim.SetInteger("type", 3);
                 break;
 
             case Host.Adult:
                 curHealth = 20;
                 curSpeed = 2;
                 curDamage = 5;
+                anim.SetInteger("type", 4);
                 break;
 
             case Host.Cop:
                 curHealth = 20;
                 curSpeed = 1;
                 curDamage = 10;
+                anim.SetInteger("type", 5);
                 break;
         }
     }

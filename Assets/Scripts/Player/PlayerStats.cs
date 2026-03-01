@@ -62,8 +62,11 @@ public class PlayerStats : MonoBehaviour, Stats
         {
             case Host.Worm:
                 curHealth = 1;
-                curSpeed = 3;
+                curSpeed = 1.5f;
                 curDamage = 0;
+                PlayerObject.getPlayer().GetComponent<SpriteRenderer>().color = Color.white;
+                PlayerObject.getPlayer().GetComponent<Animator>().SetTrigger("isWorm");
+                PlayerObject.getPlayer().transform.localScale = new Vector3(0.23f, 0.23f, 0.23f);
                 break;
 
             case Host.Cat:
@@ -74,26 +77,38 @@ public class PlayerStats : MonoBehaviour, Stats
 
             case Host.Dog:
                 curHealth = 15;
-                curSpeed = 4;
+                curSpeed = 8;
                 curDamage = 8;
+                PlayerObject.getPlayer().GetComponent<Animator>().SetTrigger("isDog");
+                PlayerObject.getPlayer().transform.rotation = Quaternion.identity;
+                PlayerObject.getPlayer().transform.localScale = new Vector3(0.73f, 0.73f, 0.73f);
                 break;
 
             case Host.Child:
                 curHealth = 20;
-                curSpeed = 3;
-                curDamage = 10;
+                curSpeed = 9;
+                curDamage = 3;
+                PlayerObject.getPlayer().GetComponent<Animator>().SetTrigger("isChild");
+                PlayerObject.getPlayer().transform.rotation = Quaternion.identity;
+                PlayerObject.getPlayer().transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
                 break;
 
             case Host.Adult:
                 curHealth = 30;
-                curSpeed = 2;
-                curDamage = 15;
+                curSpeed = 5;
+                curDamage = 6;
+                PlayerObject.getPlayer().GetComponent<Animator>().SetTrigger("isAdult");
+                PlayerObject.getPlayer().transform.rotation = Quaternion.identity;
+                PlayerObject.getPlayer().transform.localScale = new Vector3(0.73f, 0.73f, 0.73f);
                 break;
 
             case Host.Cop:
                 curHealth = 30;
-                curSpeed = 2;
-                curDamage = 30;
+                curSpeed = 5;
+                curDamage = 15;
+                PlayerObject.getPlayer().GetComponent<Animator>().SetTrigger("isCop");
+                PlayerObject.getPlayer().transform.rotation = Quaternion.identity;
+                PlayerObject.getPlayer().transform.localScale = new Vector3(0.73f, 0.73f, 0.73f);
                 break;
         }
 
