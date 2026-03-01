@@ -50,16 +50,17 @@ public class Bullet : MonoBehaviour
                 colStats = col.GetComponent<EnemyStats>();
             }
         }
+        if (hitSound != null)
+        {
+            audioSource.PlayOneShot(hitSound);
+        }
 
         if (colStats != null)
         {
             colStats.applyAttack(parentAttack.getDamage());
-            if (hitSound != null)
-            {
-                audioSource.PlayOneShot(hitSound);
-            }
             Destroy(gameObject);
         }
+        
     }
 
     IEnumerator aliveTimer()
