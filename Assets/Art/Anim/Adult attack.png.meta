@@ -1,0 +1,481 @@
+fileFormatVersion: 2
+guid: 9d47bba57df920e4aa05d863d0829467
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 492003921313295265
+    second: Adult attack_0
+  - first:
+      213: -730807396218311921
+    second: Adult attack_1
+  - first:
+      213: 2997674643632755401
+    second: Adult attack_2
+  - first:
+      213: -8613473457830540843
+    second: Adult attack_3
+  - first:
+      213: -6583424476802158048
+    second: Adult attack_4
+  - first:
+      213: 9220922091371141948
+    second: Adult attack_5
+  - first:
+      213: -1430798360120626629
+    second: Adult attack_6
+  - first:
+      213: 1333191920261486781
+    second: Adult attack_7
+  - first:
+      213: 8589271633240717251
+    second: Adult attack_8
+  - first:
+      213: 353389186599993293
+    second: Adult attack_9
+  - first:
+      213: 4817866063881972676
+    second: Adult attack_10
+  - first:
+      213: -6346420588621316964
+    second: Adult attack_11
+  - first:
+      213: 8252899339105855647
+    second: Adult attack_12
+  - first:
+      213: 5192908352147728385
+    second: Adult attack_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 400
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Adult attack_0
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 3478
+        width: 327
+        height: 794
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ab6afda5f2f3d600800000000000000
+      internalID: 492003921313295265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adult attack_1
+      rect:
+        serializedVersion: 2
+        x: 2615
+        y: 3478
+        width: 327
+        height: 794
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0bed2d8b86abd5f0800000000000000
+      internalID: -730807396218311921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adult attack_2
+      rect:
+        serializedVersion: 2
+        x: 4535
+        y: 3478
+        width: 327
+        height: 794
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c21dedb431e99920800000000000000
+      internalID: 2997674643632755401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adult attack_3
+      rect:
+        serializedVersion: 2
+        x: 6455
+        y: 3478
+        width: 327
+        height: 794
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d941c7b68bc67880800000000000000
+      internalID: -8613473457830540843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adult attack_4
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 2398
+        width: 327
+        height: 794
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 022789e915af2a4a0800000000000000
+      internalID: -6583424476802158048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adult attack_5
+      rect:
+        serializedVersion: 2
+        x: 2615
+        y: 2398
+        width: 327
+        height: 794
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3b9abd99cb47ff70800000000000000
+      internalID: 9220922091371141948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adult attack_6
+      rect:
+        serializedVersion: 2
+        x: 4342
+        y: 2378
+        width: 594
+        height: 777
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b327ccfd878c42ce0800000000000000
+      internalID: -1430798360120626629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adult attack_7
+      rect:
+        serializedVersion: 2
+        x: 6262
+        y: 2378
+        width: 594
+        height: 777
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db85b98ecf2708210800000000000000
+      internalID: 1333191920261486781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adult attack_8
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 1307
+        width: 564
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c7f6a2ea09333770800000000000000
+      internalID: 8589271633240717251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adult attack_9
+      rect:
+        serializedVersion: 2
+        x: 2452
+        y: 1307
+        width: 564
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcfb1c6c79d77e400800000000000000
+      internalID: 353389186599993293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adult attack_10
+      rect:
+        serializedVersion: 2
+        x: 4372
+        y: 1307
+        width: 564
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cb2811b8af7cd240800000000000000
+      internalID: 4817866063881972676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adult attack_11
+      rect:
+        serializedVersion: 2
+        x: 6292
+        y: 1307
+        width: 564
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9c3004791cfce7a0800000000000000
+      internalID: -6346420588621316964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adult attack_12
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 239
+        width: 518
+        height: 755
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f98e5722930388270800000000000000
+      internalID: 8252899339105855647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adult attack_13
+      rect:
+        serializedVersion: 2
+        x: 2498
+        y: 239
+        width: 518
+        height: 755
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 108ace012aae01840800000000000000
+      internalID: 5192908352147728385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Adult attack_0: 492003921313295265
+      Adult attack_1: -730807396218311921
+      Adult attack_10: 4817866063881972676
+      Adult attack_11: -6346420588621316964
+      Adult attack_12: 8252899339105855647
+      Adult attack_13: 5192908352147728385
+      Adult attack_2: 2997674643632755401
+      Adult attack_3: -8613473457830540843
+      Adult attack_4: -6583424476802158048
+      Adult attack_5: 9220922091371141948
+      Adult attack_6: -1430798360120626629
+      Adult attack_7: 1333191920261486781
+      Adult attack_8: 8589271633240717251
+      Adult attack_9: 353389186599993293
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

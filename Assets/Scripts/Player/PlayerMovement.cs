@@ -11,12 +11,16 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
     Vector2 velo;
     Vector2 lastDir;
+    Camera cam;
 
     bool paused = false;
+    float zOffset = 0;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        cam = GetComponentInChildren<Camera>();
+        zOffset = transform.rotation.eulerAngles.z;
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -54,6 +58,12 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.linearVelocity = velo;
         }
+
+        // rotate player depending on lastDir
+        Vector2 dir = lastDir.normalized;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, angle + 180f + zOffset);
+        cam.transform.rotation = Quaternion.identity;
 
     }
 

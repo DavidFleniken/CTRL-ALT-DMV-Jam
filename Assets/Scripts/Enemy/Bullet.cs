@@ -59,13 +59,17 @@ public class Bullet : MonoBehaviour
         }
         if (hitSound != null)
         {
-            audioSource.PlayOneShot(hitSound);
+            if (!audioSource.isPlaying)
+                audioSource.PlayOneShot(hitSound);
         }
 
         if (colStats != null)
         {
             colStats.applyAttack(parentAttack.getDamage());
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            // cant just destory since it messes with audio, instead have bullet "disapear" until deleted by aliveTimer
+            GetComponent<BoxCollider2D>().enabled = false;
+            GetComponent<SpriteRenderer>().enabled = false;
         }
         
     }
